@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# useScrollProgress hook
 
-## Available Scripts
+This helps you how progress that you've scroll on a container.
 
-In the project directory, you can run:
+A container can be either
+- Window object (full page scroll)
+- Any scrolling element (container scroll)
 
-### `yarn start`
+Check it out the demos:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Full page scroll demo
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Full page scroll demo](https://media.giphy.com/media/cnheCcylP3QnDSYPVP/giphy.gif)
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Container scroll demo
 
-### `yarn build`
+![Container scroll demo](https://media.giphy.com/media/Tgxtz8CMW04NzEmphv/giphy.gif)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## How the useScrollProgress() hook is implemented
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Browse the file at /src/hooks/useScrollProgress
 
-### `yarn eject`
+## How to use it
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```js 
+// Full page scroll
+const {progress, isAtBottom} = useScrollProgress({
+  isFullPageScroll: true,
+  onBottomReach: () => console.log('Yay ... bottom reach 🎉'),
+})
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js 
+// Container scroll
+const {progress, isAtBottom} = useScrollProgress({
+  isFullPageScroll: false,
+  containerRef: DOMElement ,
+  onBottomReach: () => console.log('Yay ... bottom reach 🎉'),
+})
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Props
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- `isFullPageScroll`: boolean - Indicate whether using page scroll or container scroll. 
+- `containerRef`: object - If isFullPageScroll = false, you need to set this to a DOMElement.
+- `onBottomReach`: function - A callback when user scroll to the bottom of the container.
 
-## Learn More
+### Output
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `progress`: number - A value in range of [0, 100] indicating the progress of scrolling.
+- `isAtBottom`: boolean - Let you know if user is at bottom of the container or not.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> When isAtBottom = true, I use approximately check only, it means if the scrolling distance is less than or equal to 15px, I'll treat it at bottom. 🙂
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+License: MIT

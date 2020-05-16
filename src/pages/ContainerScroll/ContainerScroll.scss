@@ -1,0 +1,16 @@
+.container-scroll {
+  padding-top: 3rem;
+
+  &__box {
+    height: 70vh;
+    padding: 1rem;
+    border: 1px solid var(--secondary);
+    border-radius: 0 0 0.5rem 0.5rem;
+
+    overflow: auto;
+
+    & > p {
+      margin: 12rem 0;
+    }
+  }
+}

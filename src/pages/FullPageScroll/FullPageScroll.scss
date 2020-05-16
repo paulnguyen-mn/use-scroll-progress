@@ -1,0 +1,13 @@
+.page-scroll {
+  &__progress {
+    position: sticky;
+    top: 0;
+  }
+
+  &__main {
+    & > p {
+      margin: 40vh 0;
+      padding: 0 1rem;
+    }
+  }
+}

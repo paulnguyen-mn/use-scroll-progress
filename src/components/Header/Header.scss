@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  flex-flow: row nowrap;
+
+  &__item {
+    flex: 0 0 auto;
+    width: 50%;
+    padding: 0.5rem 1rem;
+
+    color: black;
+    background-color: white;
+
+    text-align: center;
+    font-size: 1.25rem;
+    transition: all 0.35s ease-in-out 0s;
+
+    &--active {
+      color: white;
+      background-color: var(--primary);
+    }
+
+    &:hover {
+      color: white;
+      text-decoration: none;
+
+      &:not(.nav__item--active) {
+        color: var(--primary);
+      }
+    }
+  }
+}
